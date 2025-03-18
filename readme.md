@@ -1,8 +1,7 @@
-# tarea042_DWCS
-Tarea 04.2
+# tarea042_DWCS Hito 1
+Tarea 04.2 Hito 1
 
 1.  ## Crear Proyecto Symfony
-
 composer create-project symfony/skeleton nombre_proyecto
 
 2. ## Prepara la cadena de conexión que acceda a una base de datos en el fichero .env. y crea la DB
@@ -26,3 +25,9 @@ firewalls:
             login_path: app_login
             check_path: app_login
             default_target_path: /hello
+
+--
+
+# tarea042_DWCS Hito 2
+Tarea 04.2 Hito 2
+

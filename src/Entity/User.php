@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Mascota>
+     */
+    #[ORM\OneToMany(targetEntity: Mascota::class, mappedBy: 'User')]
+    private Collection $Mascotas;
+
+    public function __construct()
+    {
+        $this->Mascotas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,5 +119,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Mascota>
+     */
+    public function getMascotas(): Collection
+    {
+        return $this->Mascotas;
+    }
+
+    public function addMascota(Mascota $mascota): static
+    {
+        if (!$this->Mascotas->contains($mascota)) {
+            $this->Mascotas->add($mascota);
+            $mascota->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMascota(Mascota $mascota): static
+    {
+        if ($this->Mascotas->removeElement($mascota)) {
+            // set the owning side to null (unless already changed)
+            if ($mascota->getUser() === $this) {
+                $mascota->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
