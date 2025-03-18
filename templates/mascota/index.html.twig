@@ -11,10 +11,16 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Ejers/UD4/Symfony/webapp_clean/Symfony-webapp-clean-7.2.-/src/Controller/MascotaController.php</code></li>
-        <li>Your template at <code>C:/Ejers/UD4/Symfony/webapp_clean/Symfony-webapp-clean-7.2.-/templates/mascota/index.html.twig</code></li>
-    </ul>
+    <form action="" method="post">
+        <label for="nombre">Nombre de la mascota: </label>
+        <input type="text" id="nombre" name="nombre">
+
+        <label for="fechaNaci">Fecha de nacimiento: </label>
+        <input type="date" id="fechaNaci" name="fechaNaci">
+
+        <label for="peso">Peso: </label>
+        <input type="numeric" id="peso" name="peso">
+        
+    </form>
 </div>
 {% endblock %}

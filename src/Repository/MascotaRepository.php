@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Mascota;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
+
 
 /**
  * @extends ServiceEntityRepository<Mascota>
@@ -16,6 +18,13 @@ class MascotaRepository extends ServiceEntityRepository
         parent::__construct($registry, Mascota::class);
     }
 
+   
+    public function findMascotasByUsuario(int $user_id){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("SELECT m.nombre FROM App\Entity\Mascota m WHERE m.user_id = :id");
+        return $query->setParameter("id", $user_id)->getResult();
+
+    }
 //    /**
 //     * @return Mascota[] Returns an array of Mascota objects
 //     */
