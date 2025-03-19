@@ -13,19 +13,28 @@ class MascotaService{
       
     }
 
-    public function crearMascota(string $nombre, \DateTimeImmutable $fecha_naci, float $peso, User $usuario): Mascota
-    {
-        $mascota = new Mascota();
-        $mascota->setNombre($nombre);
-        $mascota->setFechaNacimiento($fecha_naci);
-        $mascota->setPeso($peso);
-        $mascota->setUser($usuario);
-        
+    public function crearMascota(Mascota $mascota)
+    {  
         $this->entityManager->persist($mascota);
         $this->entityManager->flush();
         
-        return $mascota;
     }
+
+    // public function crearMascota(string $nombre, \DateTimeImmutable $fecha_naci, float $peso, User $usuario): Mascota
+    // {
+    //     $mascota = new Mascota();
+    //     $mascota->setNombre($nombre);
+    //     $mascota->setFechaNacimiento($fecha_naci);
+    //     $mascota->setPeso($peso);
+    //     $mascota->setUser($usuario);
+
+
+        
+    //     $this->entityManager->persist($mascota);
+    //     $this->entityManager->flush();
+        
+    //     return $mascota;
+    // }
 
 
 }

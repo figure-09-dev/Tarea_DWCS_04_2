@@ -4,23 +4,42 @@
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello MascotaController! ✅</h1>
 
     <form action="" method="post">
-        <label for="nombre">Nombre de la mascota: </label>
-        <input type="text" id="nombre" name="nombre">
 
-        <label for="fechaNaci">Fecha de nacimiento: </label>
-        <input type="date" id="fechaNaci" name="fechaNaci">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la mascota: </label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{mascota.nombre}}">
+        </div>
 
-        <label for="peso">Peso: </label>
-        <input type="numeric" id="peso" name="peso">
-        
+        <div class="mb-3">
+            <label for="fechaNaci">Fecha de nacimiento: </label>
+            <input type="date" class="form-control" id="fechaNaci" name="fechaNaci"
+                value="{{mascota.fecha_nacimiento|date('Y-m-d')}}">
+        </div>
+
+        <div class="mb-3">
+            <label for="peso">Peso: </label>
+            <input type="numeric" class="form-control" id="peso" name="peso" value="{{mascota.peso}}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+
     </form>
 </div>
 {% endblock %}

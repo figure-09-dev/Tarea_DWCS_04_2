@@ -48,6 +48,11 @@ class Mascota
         return $this->fecha_nacimiento;
     }
 
+    public function getFecha_nacimiento(): ?\DateTimeImmutable
+    {
+        return $this->fecha_nacimiento;
+    }
+
     public function setFechaNacimiento(\DateTimeImmutable $fecha_nacimiento): static
     {
         $this->fecha_nacimiento = $fecha_nacimiento;
