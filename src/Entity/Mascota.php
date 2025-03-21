@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MascotaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: MascotaRepository::class)]
 class Mascota
@@ -25,6 +26,8 @@ class Mascota
     #[ORM\ManyToOne(inversedBy: 'Mascotas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $User = null;
+
+    private Collection $Users;
 
     public function getId(): ?int
     {
@@ -82,5 +85,10 @@ class Mascota
         $this->User = $User;
 
         return $this;
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->Users;
     }
 }

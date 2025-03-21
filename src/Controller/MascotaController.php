@@ -27,6 +27,7 @@ final class MascotaController extends AbstractController
     {
         $usuario = $this->getUser();
         $mascota = new Mascota();
+        
 
         try {
             if ($request->getMethod() === "POST") {
@@ -36,6 +37,7 @@ final class MascotaController extends AbstractController
                 $mascota->setFechaNacimiento($fecha_naci);
                 $mascota->setNombre($nombre);
                 $mascota->setPeso($peso);
+                $mascota->setUser($usuario);
 
 
                 $errores = $validator->validate($mascota);
@@ -59,6 +61,7 @@ final class MascotaController extends AbstractController
                 'controller_name' => 'MascotaController',
                 'Mascota' => $mascota
             ]);
+
         } catch (\Throwable $th) {
             if (!$usuario) {
                 $this->addFlash('error', 'Debes iniciar sesión para crear una entidad');

@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Hello MascotaController!{% endblock %}
 
 {% block body %}
@@ -16,6 +17,8 @@
         padding: 2px 6px;
     }
 </style>
+
+
 
 <div class="example-wrapper">
     <h1>Hello MascotaController! ✅</h1>
@@ -35,7 +38,7 @@
 
         <div class="mb-3">
             <label for="peso">Peso: </label>
-            <input type="numeric" class="form-control" id="peso" name="peso" value="{{mascota.peso}}">
+            <input type="number" class="form-control" id="peso" name="peso" value="{{mascota.peso}}">
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
