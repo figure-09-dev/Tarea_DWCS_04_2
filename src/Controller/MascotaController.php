@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Mascota;
+use App\Entity\User;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Service\MascotaService;
 use DateTimeImmutable;
@@ -72,4 +73,42 @@ final class MascotaController extends AbstractController
         }
     }
 
+    #[Route('/mascota/list', name: 'app_mascota_list')]
+    public function listarMascotas(MascotaService $mascotaService): Response{
+
+        $usuario = $this->getUser();
+
+        if (!$usuario) {
+            return $this->redirectToRoute('app_login');
+        } 
+
+        $mascotas = $mascotaService->listarMascotas($usuario);
+        return $this->render("mascota/list.html.twig", ["mascotas" => $mascotas]);
+        
+    }
+
+    #[Route('/mascota/remove', name: 'app_mascota_remove')]
+    public function eliminarMascota(MascotaService $mascotaService, Mascota $mascota){
+        $usuario = $this->getUser();
+
+        if(!$usuario ){
+            $this->addFlash('danger', 'debes estar autenticado para hacer esta accion');
+            return $this->redirectToRoute('app_login');
+        }
+
+        if ($mascota->getUser() !== $usuario) {
+            $this->addFlash('danger', 'No puedes eliminar una mascota que no te pertenece.');
+            return $this->redirectToRoute('app_mascota_list');
+        }
+
+        // Llama al servicio para eliminar la mascota
+        if ($mascotaService->eliminarMascota($mascota)) {
+            $this->addFlash('success', 'Mascota eliminada correctamente.');
+        } else {
+            $this->addFlash('danger', 'Hubo un error al eliminar la mascota.');
+        }
+
+        return $this->redirectToRoute('app_mascota_list');
+
+    }
 }

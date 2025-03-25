@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Mascotas{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Lista de Mascotas</h1>
+
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Peso (kg)</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mascota in mascotas %}
+                <tr>
+                    <td>{{ mascota.nombre }}</td>
+                    <td>{{ mascota.peso }}</td>
+                    <td>{{ mascota.fecha_nacimiento|date('d-m-Y') }}</td>
+                    <td>
+                        <form action="{{ path('app_mascota_delete', {'id': mascota.id}) }}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ mascota.id) }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">No tienes mascotas registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

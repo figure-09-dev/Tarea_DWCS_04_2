@@ -20,21 +20,21 @@ class MascotaService{
         
     }
 
-    // public function crearMascota(string $nombre, \DateTimeImmutable $fecha_naci, float $peso, User $usuario): Mascota
-    // {
-    //     $mascota = new Mascota();
-    //     $mascota->setNombre($nombre);
-    //     $mascota->setFechaNacimiento($fecha_naci);
-    //     $mascota->setPeso($peso);
-    //     $mascota->setUser($usuario);
-
-
+    public function listarMascotas(User $user){
+        return $this->mascotaRepository->findMascotasByUsuario($user);
         
-    //     $this->entityManager->persist($mascota);
-    //     $this->entityManager->flush();
-        
-    //     return $mascota;
-    // }
+    }
 
+    public function eliminarMascota (Mascota $mascota){
+        try {
+            $this->entityManager->remove($mascota);
+            $this->entityManager->flush();
+
+            return true;
+        } catch (\Throwable $th) {
+
+            return false;
+        }
+    }
 
 }
