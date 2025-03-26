@@ -21,8 +21,8 @@ class MascotaRepository extends ServiceEntityRepository
    
     public function findMascotasByUsuario(User $user){
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT m.id, m.nombre, m.peso, m.fecha_nacimiento FROM App\Entity\Mascota m WHERE m.User = :User ORDER BY m.nombre, m.peso");
-        return $query->setParameter("User", $user)->getResult();
+        $query = $em->createQuery("SELECT m.id, m.nombre, m.peso, m.fecha_nacimiento FROM App\Entity\Mascota m WHERE m.user = :user ORDER BY m.nombre, m.peso");
+        return $query->setParameter("user", $user)->getResult();
 
     }
 

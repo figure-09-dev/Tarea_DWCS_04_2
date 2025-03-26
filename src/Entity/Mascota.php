@@ -25,7 +25,7 @@ class Mascota
 
     #[ORM\ManyToOne(inversedBy: 'Mascotas')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $User = null;
+    private ?User $user = null;
 
     private Collection $Users;
 
@@ -77,12 +77,12 @@ class Mascota
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function setUser(?User $User): static
     {
-        $this->User = $User;
+        $this->user = $User;
 
         return $this;
     }

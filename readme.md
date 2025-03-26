@@ -26,8 +26,16 @@ firewalls:
             check_path: app_login
             default_target_path: /hello
 
---
+```
 
 # tarea042_DWCS Hito 2
-Tarea 04.2 Hito 2
+1. ##  Indica de qué URL has obtenido la información para obtener el usuario autenticado 
+
+
+2. ## Indica qué validación básica has usado 
+Usamos un validator para asegurarnos de que la longitud del nombre de las mascotas es menor de 30 caracteres
+
+# tarea042_DWCS Hito 3
+1. ##  Añade por qué dos propiedades ordenas.
+Se ordena por nombre y despues por peso
 

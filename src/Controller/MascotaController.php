@@ -50,9 +50,9 @@ final class MascotaController extends AbstractController
                 }
                 else{
 
-                    $mascotaService->crearMascota($mascota);
-                    $this->addFlash("success", "mascota creada correctamente");
-                    return $this->redirectToRoute("mascota/index.html.twig");
+                $mascotaService->crearMascota($mascota);
+                $this->addFlash("success", "mascota creada correctamente");
+                return $this->redirectToRoute("mascota/index.html.twig");
                 }
             }
             $mascotaService->crearMascota($mascota);
@@ -87,7 +87,7 @@ final class MascotaController extends AbstractController
         
     }
 
-    #[Route('/mascota/remove', name: 'app_mascota_remove')]
+    #[Route('/mascota/delete/{id}', name: 'app_mascota_delete', methods: ['POST'])]
     public function eliminarMascota(MascotaService $mascotaService, Mascota $mascota){
         $usuario = $this->getUser();
 
@@ -101,7 +101,6 @@ final class MascotaController extends AbstractController
             return $this->redirectToRoute('app_mascota_list');
         }
 
-        // Llama al servicio para eliminar la mascota
         if ($mascotaService->eliminarMascota($mascota)) {
             $this->addFlash('success', 'Mascota eliminada correctamente.');
         } else {

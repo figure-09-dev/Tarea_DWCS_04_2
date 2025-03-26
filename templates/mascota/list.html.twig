@@ -22,8 +22,7 @@
                     <td>{{ mascota.peso }}</td>
                     <td>{{ mascota.fecha_nacimiento|date('d-m-Y') }}</td>
                     <td>
-                        <form action="{{ path('app_mascota_delete', {'id': mascota.id}) }}" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ mascota.id) }}">
+                        <form action="{{ path('app_mascota_delete', {'id': mascota.id}) }}" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
                     </td>
